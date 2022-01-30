@@ -1,0 +1,175 @@
+<div *ngIf="!data">
+    <app-spinner></app-spinner>
+</div>
+<div class="container-fluid">
+  <div class="row">
+        <h1 class="text-center mt-5" style="margin-bottom:4rem;">Benvenuto/a!<br> Seguiamo insieme<br>la situazione pandemica in Italia<br></h1>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12 cont">
+            <div class="col-md-12 bg">
+                <h3>Attuali Positivi</h3>
+                <span *ngFor="let datum of data; last as last">
+                    <div class="positiveTot my-3" *ngIf="last">
+                        {{datum.totale_positivi | number: '1.': 'it-IT'}}
+                    </div>
+                </span>
+                <div class="sub">
+                    <h6 class="subtitle">Incremento</h6>
+                    <span *ngFor="let datum of data; last as last; index as i">
+                        <div *ngIf="last">
+                            <span style="color:rgb(255, 170, 0);">{{datum.totale_positivi - data[i - 1].totale_positivi | number: '1.': 'it-IT'}}</span>
+                            <span style="color:lightgray; font-size:0.5em;">
+                                + ({{datum.totale_positivi - data[i -1].totale_positivi - (data[i-1].totale_positivi - data[i-2].totale_positivi) | number: '1.': 'it-IT'}})
+                            </span>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12 cont">
+            <div class="col-md-12 bg">
+                <h3>Dimessi Guariti</h3>
+                <span *ngFor="let datum of data; last as last">
+                    <div class="healed my-3" *ngIf="last">
+                        {{datum.dimessi_guariti | number: '1.': 'it-IT'}}
+                    </div>
+                </span>
+                <div class="sub">
+                    <h6 class="subtitle">Incremento</h6>
+                    <span *ngFor="let datum of data; last as last; index as i">
+                        <div *ngIf="last">
+                            <span style="color:rgb(255, 170, 0);">{{datum.dimessi_guariti - data[i - 1].dimessi_guariti | number: '1.': 'it-IT'}}</span>
+                            <span style="color:lightgray; font-size:0.5em;">
+                                + ({{datum.dimessi_guariti - data[i -1].dimessi_guariti - (data[i-1].dimessi_guariti - data[i-2].dimessi_guariti) | number: '1.': 'it-IT'}})
+                            </span>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12 cont">
+            <div class="col-md-12 bg">
+                <h3>Deceduti</h3>
+                <span *ngFor="let datum of data; last as last">
+                    <div class="dead my-3" *ngIf="last">
+                        {{datum.deceduti | number: '1.': 'it-IT'}}
+                    </div>
+                </span>
+                <div class="sub">
+                    <h6 class="subtitle">Incremento</h6>
+                    <span *ngFor="let datum of data; last as last; index as i">
+                        <div *ngIf="last">
+                            <span style="color:rgb(255, 170, 0);">{{datum.deceduti - data[i - 1].deceduti | number: '1.': 'it-IT'}}</span>
+                            <span style="color:lightgray; font-size:0.5em;">
+                                + ({{datum.deceduti - data[i -1].deceduti - (data[i-1].deceduti - data[i-2].deceduti) | number: '1.': 'it-IT'}})
+                            </span>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12 cont">
+            <div class="col-md-12 bg">
+                <h3>Totale Casi</h3>
+                <span *ngFor="let datum of data; last as last">
+                    <div class="casesTot my-3" *ngIf="last">
+                        {{datum.totale_casi | number: '1.': 'it-IT'}}
+                    </div>
+                </span>
+                <div class="sub">
+                    <h6 class="subtitle">Incremento</h6>
+                    <span *ngFor="let datum of data; last as last; index as i">
+                        <div *ngIf="last">
+                            <span style="color:rgb(255, 170, 0);">{{datum.totale_casi - data[i - 1].totale_casi | number: '1.': 'it-IT'}}</span>
+                            <span style="color:lightgray; font-size:0.5em;">
+                                + ({{datum.totale_casi - data[i -1].totale_casi - (data[i-1].totale_casi - data[i-2].totale_casi) | number: '1.': 'it-IT'}})
+                            </span>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
+<div class="container-fluid megaBox">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <h4 class="text-center my-3">Dati inerenti le Regioni in ordine decrescente in base al numero di contagi</h4>
+            <div class="col-md-12 fixed box-w">
+                <div class="table-responsive">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>Regione</th>
+                                <th>Casi Totali</th>
+                                <th>Casi Attuali</th>
+                                <th>Nuovi Positivi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let reg of region | sort: 'desc':'totale_casi'">
+                                <td><a [routerLink]="['/region/', reg.denominazione_regione]">{{reg.denominazione_regione}}</a></td>
+                                <td style="color:red">{{reg.totale_casi | number: '1.': 'it-IT'}}</td>
+                                <td style="color:rgb(255,170,0);">{{reg.totale_positivi | number: '1.': 'it-IT'}}</td>
+                                <td style="color:lightgray;">{{reg.nuovi_positivi | number: '1.': 'it-IT'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="col-md-12 fixed box-w">
+                <div class="table-responsive">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>Provincia</th>
+                                <th>Casi Totali</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let prov of province | sort: 'desc':'totale_casi'">
+                                <td>{{prov.denominazione_provincia}}</td>
+                                <td style="color:red">{{prov.totale_casi | number: '1.': 'it-IT'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <h4 class="text-center my-3">Dati inerenti le Province in ordine decrescente in base al numero di contagi</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 cont">
+            <div class="col-md-12 bg box-bottom">
+                <h2 class="text-center">Tamponi Effettuati:
+                    <span class="tampons" *ngFor="let datum of data; index as i; last as last">
+                        <div *ngIf="last">
+                            <span>
+                                {{datum.tamponi - data[i -1].tamponi | number: '1.': 'it-IT'}}
+                            </span>
+                        </div>
+                    </span>
+                </h2>
+                <div class="sub">
+                    <h6 class="subtitle">
+                        Incidenza dei positivi rispetto ai tamponi effettuati
+                    </h6>
+                    <span *ngFor="let datum of data; index as i; last as last">
+                        <div *ngIf="last" style="color:rgba(211, 211, 211, 0.664)">
+                            {{(datum.nuovi_positivi / (datum.tamponi - data[i -1].tamponi)) * 100 | number: '1.1-2': 'it-IT'}} %
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 cont" style="margin-bottom:5rem;">
+            <iframe title="Somministrazione vaccini Covid19" aria-label="Mappa" id="datawrapper-chart-Pnb7l" src="https://datawrapper.dwcdn.net/Pnb7l/19/?dark=true" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="700"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();
+            </script>
+        </div>
+    </div>
+</div>

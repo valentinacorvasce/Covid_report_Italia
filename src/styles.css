@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+html, body{
+    overflow-x:hidden;
+    height: 100%;
+    background-color: #111;
+    color:rgba(255, 255, 255, 0.63);
+}
+
+a{
+    color:white;
+    text-decoration:none;
+}
+
+a:hover{
+    color:rgb(255,170,0);
+}
