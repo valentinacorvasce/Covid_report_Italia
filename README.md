@@ -1,27 +1,13 @@
-# Covid19
+# Report Covid19
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
+App realizzata in Angular 13 che fornisce un accurato report inerente la attuale situazione pandemica italiana, nonché un approfondimento grafico riguardo la situazione vaccinale.
 
-## Development server
+L'app attinge ai dati originali messi a disposizione dalla Protezione Civile e aggiornati ogni giorno a partire dalle ore 17:00 (tutti i link ai dati originali sono presenti nel footer).
+La lettura dei dati avviene mediante REST API.
+La tabella relativa alle Regioni contiene elementi cliccabili che conducono ad una pagina di dettaglio concernente ogni singola Regione Italiana, dalla quale si accede alla situazione pandemica in corso in ogni singola Provincia di una specifica Regione.
+E' stata da me creata inoltre una mappa grafica interattiva che mostra le varie percentuali di consegna e somministrazione di vaccini in ogni Regione della Penisola.
+Il tema grafico è stato elaborato con Bootstrap 5.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+L'app è testabile al seguente link:
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+http://reportcoviditalia.altervista.org/
